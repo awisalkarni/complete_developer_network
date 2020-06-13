@@ -7,6 +7,18 @@ const userSchema = new Schema({
   email: { type: String, required: true, trim: true, unique: true },
   password: { type: String, required: true },
   phone_number: { type: String },
+  skillsets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "SkillSet"
+    }
+  ],
+  hobbies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Hobby"
+    }
+  ]
 },
   { timestamps: true }
 );
