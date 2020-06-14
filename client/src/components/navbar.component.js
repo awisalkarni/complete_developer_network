@@ -5,14 +5,6 @@ export default class Navbar extends Component {
 
 
   render() {
-
-    const storedJwt = localStorage.getItem('token');
-
-    if (storedJwt == null) {
-      return <Redirect to="/login" />
-    }
-
-
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <Link to="/" className="navbar-brand">Complete Developer Network</Link>
