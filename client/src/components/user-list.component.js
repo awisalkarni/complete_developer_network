@@ -14,13 +14,13 @@ const User = props => (
             {props.user.phone_number}
         </td>
         <td>
-            
+            <Link to={"/skillset/edit/"+props.user._id}>Edit</Link>
         </td>
         <td>
             
         </td>
         <td>
-            <Link to={"/users/edit/" + props.user._id}>Edit</Link> | <button className="btn btn-default" onClick={() => props.deleteuser(props.user._id)}>Delete</button> 
+            <Link to={"/users/edit/" + props.user._id}>Edit</Link> | <button className="btn btn-default" onClick={() => props.deleteUser(props.user._id)}>Delete</button> 
         </td>
     </tr>
 )

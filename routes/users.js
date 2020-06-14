@@ -43,14 +43,21 @@ router.route('/add').post((req, res) => {
     newUser.password = bcrypt.hashSync(newUser.password, 10);
   }
 
+  const response = {
+    message: 'User added',
+    user: newUser
+  }
+
   newUser.save()
-    .then(() => res.json('User added!'))
+    .then(() => {
+      res.json(response);
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
 router.route('/:id').get((req, res) => {
-  User.findById(req.params.id)
+  User.findById(req.params.id).populate('skillsets')
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });

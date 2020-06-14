@@ -1,5 +1,6 @@
 const router = require('express').Router();
-let SkillSet = require('../models/SkillSet.model');
+let SkillSet = require('../models/skillset.model');
+let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
     SkillSet.find()
@@ -10,16 +11,31 @@ router.route('/').get((req, res) => {
 //add
 router.route('/add').post((req, res) => {
     const name = req.body.name;
-    const proficiency = req.body.proficiency;
+    const userId = req.body.user_id;
 
     const newSkillSet = new SkillSet({
-        name: name,
-        proficiency: proficiency
+        name: name
     });
 
+    const skillSetId = newSkillSet._id;
+
     newSkillSet.save()
-        .then(() => res.json('SkillSet added!'))
+        .then(() => {
+            User.findByIdAndUpdate(
+                userId,
+                { $push: { skillsets: skillSetId } },
+                { new: true, useFindAndModify: false }, function (err, user) {
+                    console.log(user);
+                    res.json({
+                        message: "New Skillset added",
+                        user: user
+                    });
+                }
+            ).populate('skillsets');
+        })
         .catch(err => res.status(400).json('Error: ' + err));
+
+    
 });
 
 //get one 

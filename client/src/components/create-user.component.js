@@ -26,7 +26,6 @@ export default class CreateUser extends Component {
     componentDidMount() {
         axios.get('/api/users/add/prepare')
             .then((res) => {
-                console.log(res.data)
                 this.setState({
                     skillsets: res.data.skillsets,
                     hobbies: res.data.hobbies,
@@ -70,7 +69,9 @@ export default class CreateUser extends Component {
         console.log(user);
 
         axios.post('/api/users/add', user)
-            .then(res => window.location = "/")
+            .then(res => {
+                window.location = '/skillset/edit/'+res.data.user._id;
+            })
             .catch((err) => console.log(err));
 
 

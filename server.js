@@ -24,8 +24,12 @@ connection.once('open', () => {
 })
 
 const usersRouter = require('./routes/users');
+const skillsetRouter = require('./routes/skillsets');
+const hobbyRouter = require('./routes/hobbies');
 
 app.use('/api/users', usersRouter);
+app.use('/api/skillsets', skillsetRouter);
+app.use('/api/hobbies', hobbyRouter);
 
 
 
