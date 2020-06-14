@@ -7,7 +7,7 @@ import UserList from "./components/user-list.component";
 import './App.css';
 import CreateUser from './components/create-user.component';
 import EditUser from './components/edit-user.component';
-import SkillSetList from './components/skillset.component';
+import UserDetails from './components/user-details.component';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
               <Route path="/users" exact component={ UserList }/>
               <Route path="/users/add" exact component={ CreateUser }/>
               <Route path="/users/edit/:id" exact component={ EditUser }/>
-              <Route path="/skillset/edit/:user_id" exact component={ SkillSetList }/>
+              <Route path="/users/details/edit/:user_id" exact component={ UserDetails }/>
 
 
 

@@ -57,7 +57,7 @@ router.route('/add').post((req, res) => {
 
 
 router.route('/:id').get((req, res) => {
-  User.findById(req.params.id).populate('skillsets')
+  User.findById(req.params.id).populate(['skillsets', 'hobbies'])
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });

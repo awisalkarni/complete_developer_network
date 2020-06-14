@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Hobby = require('../models/hobby.model');
+let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
     Hobby.find()
@@ -8,15 +9,49 @@ router.route('/').get((req, res) => {
 });
 
 //add
-router.route('/add').post((req, res) => {
+router.route('/add').post( async (req, res) => {
     const name = req.body.name;
+    const userId = req.body.user_id;
+    var hobbyId;
 
-    const newhobby = new hobby({
+    const existingHobby = await Hobby.findOne({name: name});
+
+    if (existingHobby != null) {
+        hobbyId = existingHobby._id;
+
+        User.findByIdAndUpdate(
+            userId,
+            { $push: { hobbies: hobbyId } },
+            { new: true, useFindAndModify: false }, function (err, user) {
+                res.json({
+                    message: "New Hobby added",
+                    user: user
+                });
+            }
+        ).populate(['skillsets', 'hobbies']);
+        return;
+    }
+
+    const newHobby = new Hobby({
         name: name
     });
 
-    newhobby.save()
-        .then(() => res.json('hobby added!'))
+    hobbyId = newHobby._id;
+
+    newHobby.save()
+        .then(() => {
+            User.findByIdAndUpdate(
+                userId,
+                { $push: { hobbies: hobbyId } },
+                { new: true, useFindAndModify: false }, function (err, user) {
+                    console.log(user);
+                    res.json({
+                        message: "New Hobby added",
+                        user: user
+                    });
+                }
+            ).populate(['skillsets', 'hobbies']);
+        })
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

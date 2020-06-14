@@ -66,15 +66,11 @@ export default class CreateUser extends Component {
             phoneNumber: this.state.phoneNumber,
         }
 
-        console.log(user);
-
         axios.post('/api/users/add', user)
             .then(res => {
                 window.location = '/skillset/edit/'+res.data.user._id;
             })
             .catch((err) => console.log(err));
-
-
     }
 
     render() {

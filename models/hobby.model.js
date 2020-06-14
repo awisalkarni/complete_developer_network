@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const hobbyScheme = new Schema({
-  name: { type: String, required: true, unique: true, trim: true, minlength: 3 },
+  name: { type: String, required: true, unique: true },
 },
   { timestamps: true }
 );

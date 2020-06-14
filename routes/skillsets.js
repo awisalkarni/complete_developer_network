@@ -28,11 +28,9 @@ router.route('/add').post(async (req, res) => {
                     user: user
                 });
             }
-        ).populate('skillsets');
+        ).populate(['skillsets', 'hobbies']);
         return;
     }
-
-    // return;
 
     const newSkillSet = new SkillSet({
         name: name
@@ -52,7 +50,7 @@ router.route('/add').post(async (req, res) => {
                         user: user
                     });
                 }
-            ).populate('skillsets');
+            ).populate(['skillsets', 'hobbies']);
         })
         .catch(err => res.status(400).json('Error: ' + err));
 
