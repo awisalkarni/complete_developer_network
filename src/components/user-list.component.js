@@ -20,7 +20,7 @@ const User = props => (
             
         </td>
         <td>
-            <Link to={"/edit/" + props.user._id}>Edit</Link> | <button className="btn btn-default" onClick={() => props.deleteuser(props.user._id)}>Delete</button> 
+            <Link to={"/users/edit/" + props.user._id}>Edit</Link> | <button className="btn btn-default" onClick={() => props.deleteuser(props.user._id)}>Delete</button> 
         </td>
     </tr>
 )

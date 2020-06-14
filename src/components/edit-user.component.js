@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class CreateUser extends Component {
+export default class EditUser extends Component {
+
+   
 
     constructor(props) {
         super(props);
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
 
@@ -19,11 +20,18 @@ export default class CreateUser extends Component {
             phoneNumber: "",
             skillsets: [],
             hobbies: [],
+            id: "",
 
         }
+
+        this.state.id = this.props.match.params.id;
+
+       
     }
 
     componentDidMount() {
+        
+
         axios.get('http://localhost:8080/users/add/prepare')
             .then((res) => {
                 console.log(res.data)
@@ -34,6 +42,22 @@ export default class CreateUser extends Component {
 
             })
             .catch((err) => console.log(err));
+
+        //get id from param
+        
+
+        axios.get('http://localhost:8080/users/' + this.state.id)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({
+                    username: res.data.username,
+                    phoneNumber: res.data.phone_number,
+                    email: res.data.email,
+                })
+
+
+            })
+            .catch((err) => console.log(err));
     }
 
     onChangeUsername(e) {
@@ -41,11 +65,7 @@ export default class CreateUser extends Component {
             username: e.target.value
         })
     }
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        })
-    }
+
     onChangeEmail(e) {
         this.setState({
             email: e.target.value
@@ -62,14 +82,13 @@ export default class CreateUser extends Component {
 
         const user = {
             username: this.state.username,
-            password: this.state.password,
             email: this.state.email,
             phoneNumber: this.state.phoneNumber,
         }
 
         console.log(user);
 
-        axios.post('http://localhost:8080/users/add', user)
+        axios.post('http://localhost:8080/users/update/' + this.state.id, user)
             .then(res => window.location = "/")
             .catch((err) => console.log(err));
 
@@ -79,7 +98,7 @@ export default class CreateUser extends Component {
     render() {
         return (
             <div>
-                <h3>Create New User</h3>
+                <h3>Edit User {this.state.username}</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username:</label>
@@ -111,19 +130,9 @@ export default class CreateUser extends Component {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label>Password:</label>
-                        <input type="password"
-                            required
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}
-                        />
-                    </div>
-
 
                     <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary" />
+                        <input type="submit" value="Update User" className="btn btn-primary" />
                     </div>
 
                 </form>
