@@ -3,8 +3,6 @@ import axios from 'axios';
 
 export default class EditUser extends Component {
 
-   
-
     constructor(props) {
         super(props);
 
@@ -21,12 +19,9 @@ export default class EditUser extends Component {
             skillsets: [],
             hobbies: [],
             id: "",
-
         }
 
         this.state.id = this.props.match.params.id;
-
-       
     }
 
     componentDidMount() {
@@ -54,8 +49,6 @@ export default class EditUser extends Component {
                     phoneNumber: res.data.phone_number,
                     email: res.data.email,
                 })
-
-
             })
             .catch((err) => console.log(err));
     }
