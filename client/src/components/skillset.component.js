@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default class SkillSetList extends Component {
 
@@ -22,13 +24,10 @@ export default class SkillSetList extends Component {
     async componentDidMount() {
         await axios.get('/api/users/' + this.state.userId)
             .then((res) => {
-                // console.log(res.data)
                 this.setState({
                     user: res.data,
                     skillsets: res.data.skillsets
-                })
-
-                console.log(this.state.skillsets)
+                });
 
             })
             .catch((err) => console.log(err));
@@ -38,6 +37,17 @@ export default class SkillSetList extends Component {
         this.setState({
             name: e.target.value
         })
+    }
+
+    deleteSkillset(id) {
+
+        axios.delete('/api/skillsets/' + id)
+            .then(res => console.log(res.data));
+
+        this.setState({
+            skillsets: this.state.skillsets.filter(el => el._id !== id)
+        })
+
     }
 
 
@@ -78,7 +88,7 @@ export default class SkillSetList extends Component {
                         <div className="card-body">
                             <ol>
                                 {this.state.skillsets.map((skillset) => {
-                                    return <li key={skillset._id}>{skillset.name}</li>
+                                    return <li key={skillset._id}>{skillset.name} <button onClick={ () => this.deleteSkillset(skillset._id) } className="btn btn-outline-danger btn-sm"><FontAwesomeIcon icon={faMinusCircle} /></button></li>
                                 })}
                             </ol>
                         </div>
@@ -86,7 +96,7 @@ export default class SkillSetList extends Component {
 
                 </div>
 
-                
+
                 <div style={{ marginTop: "50px" }}>
                     <h1>Add New</h1>
 

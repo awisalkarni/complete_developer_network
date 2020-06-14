@@ -10,7 +10,8 @@ const userSchema = new Schema({
   skillsets: [
     {
       type: Schema.Types.ObjectId,
-      ref: "SkillSet"
+      ref: "SkillSet",
+      unique: true
     }
   ],
   hobbies: [

@@ -9,15 +9,36 @@ router.route('/').get((req, res) => {
 });
 
 //add
-router.route('/add').post((req, res) => {
+router.route('/add').post(async (req, res) => {
     const name = req.body.name;
     const userId = req.body.user_id;
+    var skillSetId;
+
+    const existingSkillset = await SkillSet.findOne({name: name});
+
+    if (existingSkillset != null) {
+        skillSetId = existingSkillset._id;
+
+        User.findByIdAndUpdate(
+            userId,
+            { $push: { skillsets: skillSetId } },
+            { new: true, useFindAndModify: false }, function (err, user) {
+                res.json({
+                    message: "New Skillset added",
+                    user: user
+                });
+            }
+        ).populate('skillsets');
+        return;
+    }
+
+    // return;
 
     const newSkillSet = new SkillSet({
         name: name
     });
 
-    const skillSetId = newSkillSet._id;
+    skillSetId = newSkillSet._id;
 
     newSkillSet.save()
         .then(() => {
