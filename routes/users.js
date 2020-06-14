@@ -5,7 +5,7 @@ let Hobby = require('../models/hobby.model');
 const bcrypt = require('bcryptjs');
 
 router.route('/').get((req, res) => {
-  User.find()
+  User.find().populate(['skillsets', 'hobbies'])
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
 });
