@@ -68,7 +68,7 @@ export default class CreateUser extends Component {
 
         axios.post('/api/users/add', user)
             .then(res => {
-                window.location = '/skillset/edit/'+res.data.user._id;
+                window.location = '/users/details/edit/'+res.data.user._id;
             })
             .catch((err) => console.log(err));
     }

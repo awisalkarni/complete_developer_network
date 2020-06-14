@@ -14,6 +14,7 @@ const User = props => (
             {props.user.phone_number}
         </td>
         <td>
+            
             <Link to={"/users/details/edit/"+props.user._id}>Edit</Link>
         </td>
         <td>
