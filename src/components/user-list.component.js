@@ -68,7 +68,7 @@ export default class UserList extends Component {
     render(){
         return (
             <div>
-                <h3>Users</h3>
+                <h3>Users <Link to="/users/add" className="btn btn-primary">Add User</Link></h3>
                 <table className="table">
                     <thead className="thead-light">
                         <tr>

@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar.component";
 import UserList from "./components/user-list.component";
 import './App.css';
+import CreateUser from './components/create-user.component';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 
               <Route path="/" exact component={ UserList }/>
               <Route path="/users" exact component={ UserList }/>
+              <Route path="/users/add" exact component={ CreateUser }/>
 
 
 

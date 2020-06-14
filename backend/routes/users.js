@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+let SkillSet = require('../models/skillset.model');
+let Hobby = require('../models/hobby.model');
 const bcrypt = require('bcryptjs');
 
 router.route('/').get((req, res) => {
@@ -8,18 +10,31 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/add/prepare').get((req, res) => {
+  Promise.all([
+    SkillSet.find(),
+    Hobby.find()
+]).then(([skillsets, hobbies]) => {
+    res.json({
+        'skillsets': skillsets,
+        'hobbies': hobbies
+    });
+})
+    .catch(err => { res.status(400).json('error: ' + err) });
+});
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const phone_number = req.body.phone_number;
+  const phoneNumber = req.body.phoneNumber;
 
 
   const newUser = new User({
-    username,
-    email,
-    password,
-    phone_number,
+    username: username,
+    email: email,
+    password: password,
+    phone_number: phoneNumber,
 
   });
 
@@ -51,7 +66,7 @@ router.route('/update/:id').post((req, res) => {
     .then(user => {
       user.username = req.body.username;
       user.email = req.body.email;
-      user.phone_number = req.body.phone_number;
+      user.phone_number = req.body.phoneNumber;
 
 
       user.save()
