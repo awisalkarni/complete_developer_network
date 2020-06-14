@@ -7,13 +7,13 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
 // app.use(jwt());
 
-const uri = config.connectionString;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost/cdn'
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
