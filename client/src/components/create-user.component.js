@@ -24,7 +24,7 @@ export default class CreateUser extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/users/add/prepare')
+        axios.get('/api/users/add/prepare')
             .then((res) => {
                 console.log(res.data)
                 this.setState({
@@ -69,7 +69,7 @@ export default class CreateUser extends Component {
 
         console.log(user);
 
-        axios.post('http://localhost:8080/users/add', user)
+        axios.post('/api/users/add', user)
             .then(res => window.location = "/")
             .catch((err) => console.log(err));
 

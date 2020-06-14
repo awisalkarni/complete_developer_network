@@ -27,7 +27,7 @@ export default class EditUser extends Component {
     componentDidMount() {
         
 
-        axios.get('http://localhost:8080/users/add/prepare')
+        axios.get('/api/users/add/prepare')
             .then((res) => {
                 console.log(res.data)
                 this.setState({
@@ -41,7 +41,7 @@ export default class EditUser extends Component {
         //get id from param
         
 
-        axios.get('http://localhost:8080/users/' + this.state.id)
+        axios.get('/api/users/' + this.state.id)
             .then((res) => {
                 console.log(res.data);
                 this.setState({
@@ -81,7 +81,7 @@ export default class EditUser extends Component {
 
         console.log(user);
 
-        axios.post('http://localhost:8080/users/update/' + this.state.id, user)
+        axios.post('/api/users/update/' + this.state.id, user)
             .then(res => window.location = "/")
             .catch((err) => console.log(err));
 

@@ -37,7 +37,7 @@ export default class UserList extends Component {
 
     componentDidMount(){
 
-        axios.get('/users/')
+        axios.get('/api/users/')
             .then(res => {
                 console.log(res)
                 this.setState({
@@ -50,7 +50,7 @@ export default class UserList extends Component {
     }
 
     deleteUser(id){
-        axios.delete('/users/'+id)
+        axios.delete('/api/users/'+id)
             .then(res => console.log(res.data));
 
         this.setState({
@@ -68,7 +68,7 @@ export default class UserList extends Component {
     render(){
         return (
             <div>
-                <h3>Users <Link to="/users/add" className="btn btn-primary">Add User</Link></h3>
+                <h3>Users <Link to="/api/users/add" className="btn btn-primary">Add User</Link></h3>
                 <table className="table">
                     <thead className="thead-light">
                         <tr>
