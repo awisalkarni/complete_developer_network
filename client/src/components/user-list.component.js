@@ -14,11 +14,18 @@ const User = props => (
             {props.user.phone_number}
         </td>
         <td>
-            
+
+            { props.user.skillsets.slice(0, 3).map((skillset) => {
+                return skillset.name;
+            }).join(',') }
+            <br/>
             <Link to={"/users/details/edit/"+props.user._id}>({props.user.skillsets.length} skillsets) Edit</Link>
         </td>
         <td>
-            
+        { props.user.hobbies.slice(0, 3).map((hobby) => {
+                return hobby.name;
+            }).join(',') }
+            <br/>
             <Link to={"/users/details/edit/"+props.user._id}>({props.user.hobbies.length} hobbies) Edit</Link>
         </td>
         <td>
