@@ -35,15 +35,15 @@ npm
 node
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [ExpressJS](https://expressjs.com/) - The web framework used
-* [react-fontawesome](https://github.com/FortAwesome/react-fontawesome) - Font Awesome
-* [mongoose](https://mongoosejs.com/) - elegant mongodb object modeling for node.js
+* [Mongoose](https://mongoosejs.com/) - elegant mongodb object modeling for node.js
+* [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+* [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
+* [React-fontawesome](https://github.com/FortAwesome/react-fontawesome) - Font Awesome
+* [React-bootstrap](https://mongoosejs.com/) - The most popular front-end framework. Rebuilt for React.
+
 
 ## Authors
 
